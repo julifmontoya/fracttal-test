@@ -1,0 +1,9 @@
+1.  **Fracttal Core (Emisor de Eventos):** Publica el cambio de estado (Ej: **OT Creada**) inmediatamente.
+2.  **Message Broker (Kafka/RabbitMQ):** Recibe el evento y lo pone en el Topic correspondiente para su consumo.
+3.  **Motor de Integración (Servicio Genérico):**
+    * Consume el evento del Broker.
+    * Consulta la **Base de Datos de Configuración (4)** para saber cómo mapear y a qué ERP enviar.
+    * Ejecuta el **Módulo de Transformación** (lógica estándar).
+    * Utiliza el **Módulo de Enrutamiento/Adaptador** (lógica específica del cliente) para enviar los datos.
+4.  **DB Configuración:** Parametriza el Motor de Integración para cada cliente sin cambiar código.
+5.  **ERPs Clientes:** Reciben el dato transformado.
